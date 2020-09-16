@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
-import AppBar from './AppBar.js';
+import AppBar from './AppBar';
 import { Route, Switch, Redirect } from 'react-router-native';
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const Main = () => {
             <AppBar/>
             <Switch>
                 <Route path="/signin" exact>
-                    <SignIn/>
+                    <SignIn />
                 </Route>
                 <Route path="/" exact>
                     <View style={styles.container}>

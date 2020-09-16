@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { TouchableWithoutFeedback, Text, View, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { colors } from '../theme';
 import { Link } from 'react-router-native'
@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         opacity: 0.85,
         flexDirection: 'row',
         justifyContent: "space-evenly",
-        paddingRight: '30%',
     },
     text : {
         fontSize: 24,
@@ -23,8 +22,10 @@ const styles = StyleSheet.create({
 const AppBar = () => {
     return (
         <View style={styles.container}>
-            <AppBarTab title='Repositories' url='/'/>
-            <AppBarTab title='SignIn' url='/signin'/>
+             <ScrollView horizontal>
+                 <AppBarTab title='Repositories' url='/'/>
+                 <AppBarTab title='SignIn' url='/signin'/>
+             </ScrollView>
         </View>
     )
 }

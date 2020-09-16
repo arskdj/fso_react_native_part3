@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import RepositoryList from './RepositoryList';
+import AppBar from './AppBar.js'
 
 const styles = StyleSheet.create({
   container: {
@@ -13,10 +14,13 @@ const styles = StyleSheet.create({
 
 const Main = () => {
     return( 
+        <>
+        <AppBar/>
         <View style={styles.container}>
             <Text> hello world </Text>
             <RepositoryList/>            
         </View>
+        </>
     );
 };
 

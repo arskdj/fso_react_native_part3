@@ -5,6 +5,8 @@ import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import AppBar from './AppBar';
 import { Route, Switch, Redirect } from 'react-router-native';
+import {GET_REPOSITORIES} from '../graphql/queries'
+import { useQuery } from '@apollo/react-hooks';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,6 +17,10 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+    const { data, error, loading } = useQuery(GET_REPOSITORIES, {
+      fetchPolicy: 'cache-and-network',
+    });
+    console.log(data)
     return( 
         <>
             <AppBar/>

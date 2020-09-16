@@ -17,7 +17,6 @@ const Main = () => {
         <>
         <AppBar/>
         <View style={styles.container}>
-            <Text> hello world </Text>
             <RepositoryList/>            
         </View>
         </>

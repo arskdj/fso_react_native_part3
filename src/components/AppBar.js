@@ -3,17 +3,15 @@ import { TouchableWithoutFeedback, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { colors } from '../theme';
 
-console.log(colors)
-
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: colors.dark,
+        backgroundColor: colors.darkgreen,
         opacity: 0.85
     },
     text : {
         fontSize: 24,
-        color: colors.light,
+        color: colors.white,
     }
 });
 

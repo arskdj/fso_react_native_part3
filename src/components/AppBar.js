@@ -1,9 +1,10 @@
 import React, {useState} from "react"
-import { ScrollView, Text, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { colors } from '../theme';
 import { Link } from 'react-router-native'
 import AppBarTab from './AppBarTab'
+import Text from './Text'
 
 const styles = StyleSheet.create({
     container: {

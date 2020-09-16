@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useField } from 'formik';
+import { colors } from '../theme';
 import TextInput from './TextInput'
 
 const styles = StyleSheet.create({
   errorText: {
+      color: colors.red,
     marginTop: 5,
   },
 });

@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, TouchableWithoutFeedback, Text } from 'react-native';
-import FormikTextInput from './FormikTextInput'
+import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
-import { colors } from '../theme'
+import { colors } from '../theme';
+import * as yup from 'yup';
 
 
 const SignIn = () => {
@@ -36,10 +37,22 @@ const SignIn = () => {
             padding: 20,
             color: colors.white,
         },
-    }
+    };
+
+    const validationSchema = yup.object().shape({
+        username: yup
+        .string()
+        .required('username is required'),
+        password: yup
+        .string()
+        .required('password is required'),
+    });
 
     return (
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Formik 
+            initialValues={initialValues} 
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}>
             {( {handleSubmit} ) => (
                 <View style={styles.form}>
                     <FormikTextInput 
@@ -56,7 +69,7 @@ const SignIn = () => {
                 </View>
             )}
         </Formik>
-    )
+    );
 };
 
 export default SignIn;

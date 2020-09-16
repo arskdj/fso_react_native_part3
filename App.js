@@ -1,11 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Main from './src/components/Main'
+import { StyleSheet   } from 'react-native';
+import Main from './src/components/Main';
+import { NativeRouter } from 'react-router-native';
 
 export default function App() {
     console.log('hello world');
-    return <Main />;
+    return (
+        <NativeRouter>
+            <Main style={styles}/>
+        </NativeRouter>
+    );
 }
 
 const styles = StyleSheet.create({

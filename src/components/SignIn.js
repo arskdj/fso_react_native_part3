@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
@@ -6,13 +6,16 @@ import { colors } from '../theme';
 import * as yup from 'yup';
 import Text from './Text';
 import { SIGN_IN } from '../graphql/mutations';
-import { useMutation } from '@apollo/react-hooks';
-import AuthStorage from '../utils/authStorage';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import AuthStorageContext from '../contexts/AuthStorageContext';
+import { useHistory } from "react-router-native";
 
 
 const SignIn = () => {
     const [mutate, result] = useMutation(SIGN_IN);
-    const storage = new AuthStorage();
+    const apolloClient = useApolloClient();
+    const authStorage = useContext(AuthStorageContext);
+    const history = useHistory();
 
     const initialValues = {
         username: '',
@@ -25,9 +28,11 @@ const SignIn = () => {
             if ( result.data ) {
                 const token = result.data.authorize.accessToken;
                 console.log('token', token);
-                await storage.setAccessToken(token);
-                const store = await storage.getAccessToken();
+                await authStorage.setAccessToken(token);
+                const store = await authStorage.getAccessToken();
                 console.log('store', store);
+                apolloClient.resetStore();
+                history.push('/');
             }
         };
 

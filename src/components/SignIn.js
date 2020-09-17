@@ -1,21 +1,45 @@
-import React from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import React, {useEffect} from 'react';
+import { AsyncStorage, View, TouchableWithoutFeedback } from 'react-native';
 import FormikTextInput from './FormikTextInput'
 import { Formik } from 'formik';
 import { colors } from '../theme';
 import * as yup from 'yup';
-import Text from './Text'
+import Text from './Text';
+import { SIGN_IN } from '../graphql/mutations';
+import { useMutation } from '@apollo/react-hooks';
 
 
 const SignIn = () => {
+    const [mutate, result] = useMutation(SIGN_IN);
     const initialValues = {
         username: '',
         password: '',
     };
 
+    useEffect(() => {
+        const signin = async () => {
+            console.log('SignIn',result.data)
+            if ( result.data ) {
+                const token = result.data.authorize.accessToken
+                console.log('token', token)
+                await AsyncStorage.setItem('token', token);
+            }
+        }
+
+        signin();
+    }, [result.data])
+
     const onSubmit = values => {
         console.log(values);
 
+        const {username, password} = values;
+
+        mutate({
+            variables : {
+                username,
+                password
+            }
+        })
     };
 
     const styles = {
@@ -60,6 +84,7 @@ const SignIn = () => {
                         style = {styles.text}
                         name="username" placeholder="username" />
                     <FormikTextInput 
+                        secureTextEntry={true}
                         style = {styles.text}
                         name="password" placeholder="password" />
                     <TouchableWithoutFeedback onPress={handleSubmit}>

@@ -1,16 +1,19 @@
 import React, {useEffect} from 'react';
-import { AsyncStorage, View, TouchableWithoutFeedback } from 'react-native';
-import FormikTextInput from './FormikTextInput'
+import { View, TouchableWithoutFeedback } from 'react-native';
+import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
 import { colors } from '../theme';
 import * as yup from 'yup';
 import Text from './Text';
 import { SIGN_IN } from '../graphql/mutations';
 import { useMutation } from '@apollo/react-hooks';
+import AuthStorage from '../utils/authStorage';
 
 
 const SignIn = () => {
     const [mutate, result] = useMutation(SIGN_IN);
+    const storage = new AuthStorage();
+
     const initialValues = {
         username: '',
         password: '',
@@ -18,16 +21,18 @@ const SignIn = () => {
 
     useEffect(() => {
         const signin = async () => {
-            console.log('SignIn',result.data)
+            console.log('SignIn',result.data);
             if ( result.data ) {
-                const token = result.data.authorize.accessToken
-                console.log('token', token)
-                await AsyncStorage.setItem('token', token);
+                const token = result.data.authorize.accessToken;
+                console.log('token', token);
+                await storage.setAccessToken(token);
+                const store = await storage.getAccessToken();
+                console.log('store', store);
             }
-        }
+        };
 
         signin();
-    }, [result.data])
+    }, [result.data]);
 
     const onSubmit = values => {
         console.log(values);
@@ -39,7 +44,7 @@ const SignIn = () => {
                 username,
                 password
             }
-        })
+        });
     };
 
     const styles = {
@@ -62,7 +67,7 @@ const SignIn = () => {
             padding: 20,
             color: colors.white,
         },
-    }
+    };
 
     const validationSchema = yup.object().shape({
         username: yup
@@ -95,7 +100,7 @@ const SignIn = () => {
                 </View>
             )}
         </Formik>
-    )
+    );
 };
 
 export default SignIn;

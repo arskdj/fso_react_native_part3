@@ -24,10 +24,8 @@ const SignIn = () => {
 
     useEffect(() => {
         const signin = async () => {
-            console.log('SignIn',result.data);
             if ( result.data ) {
                 const token = result.data.authorize.accessToken;
-                console.log('token', token);
                 await authStorage.setAccessToken(token);
                 const store = await authStorage.getAccessToken();
                 console.log('store', store);
@@ -40,8 +38,6 @@ const SignIn = () => {
     }, [result.data]);
 
     const onSubmit = values => {
-        console.log(values);
-
         const {username, password} = values;
 
         mutate({

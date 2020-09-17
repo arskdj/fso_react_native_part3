@@ -6,14 +6,14 @@ import { colors } from '../theme';
 const styles = StyleSheet.create({
     text : {
         fontSize: 24,
-        backgroundColor: colors.lightgreen,
-        color: colors.white,
+        backgroundColor: colors.gray,
+        color: colors.darkgreen,
         padding:10,
         marginLeft:10,
     }
 });
 
-const AppBarTab = ({title, url}) => {
+const AppBarTab = ({title, url }) => {
     return (
         <Link to={url}> 
             <Text style={styles.text}>{title}</Text>

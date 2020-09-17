@@ -20,7 +20,7 @@ const Main = () => {
     const { data, error, loading } = useQuery(GET_REPOSITORIES, {
       fetchPolicy: 'cache-and-network',
     });
-    console.log(data)
+    //console.log(data)
     return( 
         <>
             <AppBar/>
